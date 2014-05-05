@@ -10,13 +10,27 @@
 
 @implementation Triangle
 
+@synthesize motionManager;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
         [self setBackgroundColor:[UIColor clearColor]];
         
+        /*
+         motionManager = [[CMMotionManager alloc] init];
+         motionManager.gyroUpdateInterval = 0.2f;
+         
+         [self.motionManager startGyroUpdatesToQueue:[NSOperationQueue currentQueue]
+         withHandler:^(CMGyroData *gyroData, NSError *error)
+         {
+         [self rotateToAngle:gyroData.rotationRate.z];
+         }];
+         */
+        
+        [self rotateToAngle:M_PI];
+
     }
     return self;
 }
@@ -38,5 +52,15 @@
     CGContextFillPath(ctx);
 }
 
+- (void)rotateToAngle:(float)radians
+{
+    [UIView animateWithDuration:3.0f
+                          delay:0.0f
+                        options:0
+                     animations:^{
+                         self.transform = CGAffineTransformMakeRotation(radians);
+                     }
+                     completion:nil];
+}
 
 @end

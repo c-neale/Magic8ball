@@ -25,7 +25,7 @@
     if (self) {
         // Custom initialization
         
-        CGRect triRect = CGRectMake(20.0f, 20.0f, 100.0f, 100.0f);
+        CGRect triRect = CGRectMake(20.0f, 20.0f, 200.0f, 200.0f);
         Circle * c = [[Circle alloc] initWithFrame:triRect];
      
         [self.view addSubview:c];

@@ -7,13 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreMotion/CoreMotion.h>
 
 @interface Circle : UIView
 {
-    float rotation;
 }
-
-@property (strong, nonatomic) CMMotionManager *motionManager;
 
 @end

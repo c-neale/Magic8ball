@@ -12,8 +12,6 @@
 
 @implementation Circle
 
-@synthesize motionManager;
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -21,20 +19,15 @@
         // Initialization code
         [self setBackgroundColor:[UIColor clearColor]];
         
-        CGRect triRect = CGRectMake(40.0f, 40.0f, 40.0f, 40.0f);
+        float halfWidth = frame.size.width * 0.5f;
+        float halfHeight = frame.size.height * 0.5f;
+        float triWidth = frame.size.width * 0.7f;
+        float triHeight = frame.size.height * 0.7f;
+        
+        CGRect triRect = CGRectMake(halfWidth - (triWidth * 0.5f), halfHeight - (triHeight * 0.5f), triWidth, triHeight);
         Triangle * tri = [[Triangle alloc] initWithFrame:triRect];
         
         [self addSubview:tri];
-        
-        motionManager = [[CMMotionManager alloc] init];
-        motionManager.gyroUpdateInterval = .2;
-        
-        [self.motionManager startGyroUpdatesToQueue:[NSOperationQueue currentQueue]
-                                        withHandler:^(CMGyroData *gyroData, NSError *error)
-         {
-             rotation = gyroData.rotationRate.z;
-         }];
-
     }
     return self;
 }
@@ -45,12 +38,11 @@
     CGContextSetRGBFillColor(ctx, 0.0f, 0.0f, 1.0f, 1.0f);
     
     CGContextBeginPath(ctx);
-    
     CGContextAddEllipseInRect(ctx, rect);
-    
     CGContextClosePath(ctx);
     
     CGContextFillPath(ctx);
 }
+
 
 @end
