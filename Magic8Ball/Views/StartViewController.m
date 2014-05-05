@@ -9,6 +9,8 @@
 #import "StartViewController.h"
 #import "ResultViewController.h"
 
+#import "Circle.h"
+
 @interface StartViewController ()
 
 @end
@@ -22,6 +24,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        CGRect triRect = CGRectMake(20.0f, 20.0f, 100.0f, 100.0f);
+        Circle * c = [[Circle alloc] initWithFrame:triRect];
+     
+        [self.view addSubview:c];
     }
     return self;
 }

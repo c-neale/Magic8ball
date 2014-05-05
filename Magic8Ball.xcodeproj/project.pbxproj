@@ -30,6 +30,8 @@
 		0B10567E1915F7AA00A8AB63 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B10567D1915F7AA00A8AB63 /* AdSupport.framework */; };
 		0B1056801915F7BA00A8AB63 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B10567F1915F7BA00A8AB63 /* SystemConfiguration.framework */; };
 		0B1056821915F7C900A8AB63 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B1056811915F7C900A8AB63 /* libz.dylib */; };
+		0BC6BDAF1917415700D14BBF /* Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6BDAE1917415700D14BBF /* Triangle.m */; };
+		0BC6BDB319174CFB00D14BBF /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6BDB219174CFB00D14BBF /* Circle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +82,10 @@
 		0B10567D1915F7AA00A8AB63 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		0B10567F1915F7BA00A8AB63 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0B1056811915F7C900A8AB63 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		0BC6BDAD1917415700D14BBF /* Triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Triangle.h; sourceTree = "<group>"; };
+		0BC6BDAE1917415700D14BBF /* Triangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Triangle.m; sourceTree = "<group>"; };
+		0BC6BDB119174CFB00D14BBF /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Circle.h; sourceTree = "<group>"; };
+		0BC6BDB219174CFB00D14BBF /* Circle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Circle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +155,7 @@
 		0B1055611913971500A8AB63 /* Magic8Ball */ = {
 			isa = PBXGroup;
 			children = (
+				0BC6BDB019174CD300D14BBF /* ViewControllers */,
 				0B1055A41915F71300A8AB63 /* GoogleAnalytics */,
 				0B10558F1913977700A8AB63 /* Views */,
 				0B10556A1913971500A8AB63 /* AppDelegate.h */,
@@ -195,12 +202,10 @@
 		0B10558F1913977700A8AB63 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0B10558A1913976B00A8AB63 /* StartViewController.h */,
-				0B10558B1913976B00A8AB63 /* StartViewController.m */,
-				0B10558C1913976B00A8AB63 /* StartViewController.xib */,
-				0B10559319139F1200A8AB63 /* ResultViewController.h */,
-				0B10559419139F1200A8AB63 /* ResultViewController.m */,
-				0B10559519139F1200A8AB63 /* ResultViewController.xib */,
+				0BC6BDAD1917415700D14BBF /* Triangle.h */,
+				0BC6BDAE1917415700D14BBF /* Triangle.m */,
+				0BC6BDB119174CFB00D14BBF /* Circle.h */,
+				0BC6BDB219174CFB00D14BBF /* Circle.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -216,6 +221,19 @@
 				0B1055A31915F70C00A8AB63 /* GAITracker.h */,
 			);
 			name = GoogleAnalytics;
+			sourceTree = "<group>";
+		};
+		0BC6BDB019174CD300D14BBF /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0B10558A1913976B00A8AB63 /* StartViewController.h */,
+				0B10558B1913976B00A8AB63 /* StartViewController.m */,
+				0B10558C1913976B00A8AB63 /* StartViewController.xib */,
+				0B10559319139F1200A8AB63 /* ResultViewController.h */,
+				0B10559419139F1200A8AB63 /* ResultViewController.m */,
+				0B10559519139F1200A8AB63 /* ResultViewController.xib */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,10 +332,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BC6BDAF1917415700D14BBF /* Triangle.m in Sources */,
 				0B10558D1913976B00A8AB63 /* StartViewController.m in Sources */,
 				0B10556C1913971500A8AB63 /* AppDelegate.m in Sources */,
 				0B1055681913971500A8AB63 /* main.m in Sources */,
 				0B10559619139F1200A8AB63 /* ResultViewController.m in Sources */,
+				0BC6BDB319174CFB00D14BBF /* Circle.m in Sources */,
 				0B10559D1914F75000A8AB63 /* UpdateChecker.m in Sources */,
 				0B10559A1913BEC800A8AB63 /* VersionComparer.m in Sources */,
 			);
@@ -526,6 +546,7 @@
 				0B1055861913971500A8AB63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0B1055871913971500A8AB63 /* Build configuration list for PBXNativeTarget "Magic8BallTests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +555,7 @@
 				0B1055891913971500A8AB63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
