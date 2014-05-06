@@ -11,9 +11,9 @@
 
 @interface Triangle : UIView
 {
-    float rotation;
+    BOOL reverse;
 }
 
-@property (strong, nonatomic) CMMotionManager *motionManager;
+//@property (strong, nonatomic) CMMotionManager *motionManager;
 
 @end

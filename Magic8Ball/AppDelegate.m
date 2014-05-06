@@ -12,6 +12,8 @@
 
 #import "GAI.h"
 
+#define DISABLE_ANALYTICS
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -23,18 +25,17 @@
     [[self window] setRootViewController:svc];
     
     // Google Analytics initilisation code:
-    
+#ifndef DISABLE_ANALYTICS
     // send uncaught exceptions to google...
     [[GAI sharedInstance] setTrackUncaughtExceptions:YES];
     
     // set the dispatch interval to 20s
     [[GAI sharedInstance] setDispatchInterval:20];
     
-#ifdef DEBUG
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
-#endif
     
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-50634961-1"];
+#endif
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
