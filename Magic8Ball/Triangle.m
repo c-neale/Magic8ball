@@ -18,24 +18,17 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setBackgroundColor:[UIColor clearColor]];
+        [self setBackgroundColor:[UIColor greenColor]];
         
-        /*
-         motionManager = [[CMMotionManager alloc] init];
-         motionManager.gyroUpdateInterval = 0.2f;
-         
-         [self.motionManager startGyroUpdatesToQueue:[NSOperationQueue currentQueue]
-         withHandler:^(CMGyroData *gyroData, NSError *error)
-         {
-         [self rotateToAngle:gyroData.rotationRate.z];
-         }];
-         */
+        // store the original position of this element. the triangle is going to sway.
+        // we want to contrain it around the original point so that it doesn't wander off...
+        origin = frame.origin;
         
         reverse = YES;
         
         float angle = [self randomFloatInRange:5.0f toMax:10.0f] * (M_PI / 180.0f);
-        [self rotateToAngle:angle];
-
+        CGPoint pt = [self randomPointAroundPoint:origin];
+        [self floatWithAngle:angle ToPosition:pt];
     }
     return self;
 }
@@ -57,15 +50,32 @@
     CGContextFillPath(ctx);
 }
 
-- (void)rotateToAngle:(float)radians
+- (void)floatWithAngle:(float)radians ToPosition:(CGPoint)point
 {
-    NSLog(@"angle: %0.4fr (%0.2fd) reverse: %@", radians, radians * (180.0f/M_PI), reverse == YES ? @"YES" : @"NO");
+//    NSLog(@"width: %0.2f height: %0.2f", self.frame.size.width, self.frame.size.height);
     
     [UIView animateWithDuration:[self randomFloatInRange:4.0f toMax:8.0f]
                           delay:[self randomFloatInRange:0.0f toMax:0.5f]
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-                         self.transform = CGAffineTransformMakeRotation(radians);
+                         
+                         //CGAffineTransformMakeTranslation(self.frame.origin.x - origin.x, self.frame.origin.y - origin.y);
+                         
+                         //NSLog(@"origin: %0.2f,%0.2f", origin.x, origin.y);
+                         //NSLog(@"curren: %0.2f,%0.2f", self.frame.origin.x, self.frame.origin.y);
+                         //NSLog(@"revers: %0.2f,%0.2f", self.frame.origin.x - origin.x, self.frame.origin.y - origin.y);
+                         
+                         // translate back towards the origin.  this will contrain it to float around a point.
+                         CGAffineTransform trans = CGAffineTransformMakeTranslation(self.frame.origin.x - origin.x, self.frame.origin.y - origin.y);
+                         
+                         // add the translation for the new point.
+                         trans = CGAffineTransformTranslate(trans, point.x, point.y);
+                         
+                         // and finally add the rotation.
+                         trans = CGAffineTransformRotate(trans, radians);
+
+                         // and assign it back to the view.
+                         self.transform = trans;
                      }
                      completion:^(BOOL finished) {
                          // get the angle and convert to radians.
@@ -73,8 +83,20 @@
                          angle *= reverse ? -1.0f : 1.0f;
                          reverse = !reverse;
                          
-                         [self rotateToAngle:angle];
+                         CGPoint pt = [self randomPointAroundPoint:origin];
+                         
+                         [self floatWithAngle:angle ToPosition:pt];
                      }];
+}
+
+- (CGPoint) randomPointAroundPoint:(CGPoint)pt
+{
+    float xPos = /*pt.x +*/ [self randomFloatInRange:-30.0f toMax:30.0f];
+    float yPos = /*pt.y +*/ [self randomFloatInRange:-30.0f toMax:30.0f];
+    
+//    NSLog(@"xPos: %0.2f yPos: %0.2f", xPos, yPos);
+    
+    return CGPointMake(xPos, yPos);
 }
 
 - (float) randomFloatInRange:(float)minDegrees toMax:(float)maxDegrees

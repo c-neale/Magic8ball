@@ -12,8 +12,8 @@
 @interface Triangle : UIView
 {
     BOOL reverse;
+    
+    CGPoint origin;
 }
-
-//@property (strong, nonatomic) CMMotionManager *motionManager;
 
 @end
