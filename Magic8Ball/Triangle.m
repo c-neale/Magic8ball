@@ -18,7 +18,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setBackgroundColor:[UIColor greenColor]];
+        [self setBackgroundColor:[UIColor clearColor]];
         
         // store the original position of this element. the triangle is going to sway.
         // we want to contrain it around the original point so that it doesn't wander off...
@@ -27,7 +27,7 @@
         reverse = YES;
         
         float angle = [self randomFloatInRange:5.0f toMax:10.0f] * (M_PI / 180.0f);
-        CGPoint pt = [self randomPointAroundPoint:origin];
+        CGPoint pt = [self randomPoint];
         [self floatWithAngle:angle ToPosition:pt];
     }
     return self;
@@ -60,24 +60,13 @@
 
 - (void)floatWithAngle:(float)radians ToPosition:(CGPoint)point
 {
-//    NSLog(@"width: %0.2f height: %0.2f", self.frame.size.width, self.frame.size.height);
-    
     [UIView animateWithDuration:[self randomFloatInRange:4.0f toMax:8.0f]
                           delay:[self randomFloatInRange:0.0f toMax:0.5f]
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          
-                         //CGAffineTransformMakeTranslation(self.frame.origin.x - origin.x, self.frame.origin.y - origin.y);
-                         
-                         //NSLog(@"origin: %0.2f,%0.2f", origin.x, origin.y);
-                         //NSLog(@"curren: %0.2f,%0.2f", self.frame.origin.x, self.frame.origin.y);
-                         //NSLog(@"revers: %0.2f,%0.2f", self.frame.origin.x - origin.x, self.frame.origin.y - origin.y);
-                         
-                         // translate back towards the origin.  this will contrain it to float around a point.
-                         CGAffineTransform trans = CGAffineTransformMakeTranslation(self.frame.origin.x - origin.x, self.frame.origin.y - origin.y);
-                         
                          // add the translation for the new point.
-                         trans = CGAffineTransformTranslate(trans, point.x, point.y);
+                         CGAffineTransform trans = CGAffineTransformMakeTranslation(point.x, point.y);
                          
                          // and finally add the rotation.
                          trans = CGAffineTransformRotate(trans, radians);
@@ -91,18 +80,16 @@
                          angle *= reverse ? -1.0f : 1.0f;
                          reverse = !reverse;
                          
-                         CGPoint pt = [self randomPointAroundPoint:origin];
+                         CGPoint pt = [self randomPoint];
                          
-                         [self floatWithAngle:angle ToPosition:pt];
+                         [self floatWithAngle:angle ToPosition: pt];
                      }];
 }
 
-- (CGPoint) randomPointAroundPoint:(CGPoint)pt
+- (CGPoint) randomPoint
 {
-    float xPos = /*pt.x +*/ [self randomFloatInRange:-30.0f toMax:30.0f];
-    float yPos = /*pt.y +*/ [self randomFloatInRange:-30.0f toMax:30.0f];
-    
-//    NSLog(@"xPos: %0.2f yPos: %0.2f", xPos, yPos);
+    float xPos = [self randomFloatInRange:-10.0f toMax:10.0f];
+    float yPos = [self randomFloatInRange:-10.0f toMax:10.0f];
     
     return CGPointMake(xPos, yPos);
 }
