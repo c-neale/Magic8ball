@@ -41,9 +41,17 @@
     
     CGContextBeginPath(ctx);
     
-    CGContextMoveToPoint(ctx, CGRectGetMinX(rect), CGRectGetMinY(rect));
-    CGContextAddLineToPoint(ctx, CGRectGetMaxX(rect), CGRectGetMinY(rect));
-    CGContextAddLineToPoint(ctx, CGRectGetMidX(rect), CGRectGetMaxY(rect));
+    // Add a triangle to the current path
+    CGPoint center = CGPointMake(rect.origin.x + (rect.size.width * 0.5f), rect.origin.y + (rect.size.height * 0.5f));
+    CGFloat halfWidth = rect.size.width * 0.5f;
+    
+    CGContextMoveToPoint(ctx, center.x, center.y + halfWidth);
+    for(int i = 1; i < 3; ++i)
+    {
+        CGFloat x = halfWidth * sinf(i * 4.0f * M_PI / 3.0f);
+        CGFloat y = halfWidth * cosf(i * 4.0f * M_PI / 3.0f);
+        CGContextAddLineToPoint(ctx, center.x + x, center.y + y);
+    }
     
     CGContextClosePath(ctx);
     
