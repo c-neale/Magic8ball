@@ -19,15 +19,7 @@
         // Initialization code
         [self setBackgroundColor:[UIColor clearColor]];
         
-        float halfWidth = frame.size.width * 0.5f;
-        float halfHeight = frame.size.height * 0.5f;
-        float triWidth = frame.size.width * 0.7f;
-        float triHeight = frame.size.height * 0.7f;
         
-        CGRect triRect = CGRectMake(halfWidth - (triWidth * 0.5f), halfHeight - (triHeight * 0.5f), triWidth, triHeight);
-        Triangle * tri = [[Triangle alloc] initWithFrame:triRect];
-        
-        [self addSubview:tri];
     }
     return self;
 }

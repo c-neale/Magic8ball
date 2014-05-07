@@ -18,7 +18,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setBackgroundColor:[UIColor clearColor]];
+        [self setBackgroundColor:[UIColor greenColor]];
         
         // store the original position of this element. the triangle is going to sway.
         // we want to contrain it around the original point so that it doesn't wander off...

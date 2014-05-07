@@ -10,6 +10,8 @@
 #import "ResultViewController.h"
 
 #import "Circle.h"
+#import "Triangle.h"
+#import "GyroStabilizedView.h"
 
 @interface StartViewController ()
 
@@ -25,10 +27,32 @@
     if (self) {
         // Custom initialization
         
-        CGRect triRect = CGRectMake(20.0f, 20.0f, 200.0f, 200.0f);
-        Circle * c = [[Circle alloc] initWithFrame:triRect];
-     
+        // first, draw the backgroud circle
+        CGRect rect = CGRectMake(50.0f, 100.0f, 200.0f, 200.0f);
+        Circle * c = [[Circle alloc] initWithFrame:rect];
         [self.view addSubview:c];
+        
+        // calculate where the triangle will go.
+        float halfWidth = c.frame.size.width * 0.5f;
+        float halfHeight = c.frame.size.height * 0.5f;
+        float triWidth = c.frame.size.width * 0.8f;
+        float triHeight = c.frame.size.height * 0.8f;
+        
+        CGRect triRect = CGRectMake(halfWidth - (triWidth * 0.5f), halfHeight - (triHeight * 0.5f), triWidth, triHeight);
+        
+        // create a GyroStabilizedView.  this will hold the triangle and allow us to animate
+        // and align the triangle independant of the floating motion of the triangle.
+        GyroStabilizedView * gyroView = [[GyroStabilizedView alloc] initWithFrame:triRect];
+        
+        // create the triangle.
+        CGRect testRect = CGRectMake(0.0f, 0.0f, triWidth, triHeight);
+        Triangle * tri = [[Triangle alloc] initWithFrame:testRect];
+        
+        // add the triangle to the gyro view
+        [gyroView addSubview:tri];
+        
+        // and finally add the gyro view to the circle.
+        [c addSubview:gyroView];
     }
     return self;
 }
@@ -68,10 +92,7 @@
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
-    // TODO: push the new view controller to show the result
-    ResultViewController * rvc = [[ResultViewController alloc] init];
-    //[[self navigationController] pushViewController:rvc animated:YES];
-    [self presentViewController:rvc animated:YES completion:nil];
+    
 }
 
 - (void) motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
