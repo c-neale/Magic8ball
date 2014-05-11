@@ -17,7 +17,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        [self setBackgroundColor:[UIColor orangeColor]];
+        UIColor * backColor = [UIColor colorWithRed:1.0f green:0.5f blue:0.12f alpha:0.33f];
+        
+        [self setBackgroundColor:backColor];
         
         motionManager = [[CMMotionManager alloc] init];
         [motionManager setGyroUpdateInterval:0.2f];

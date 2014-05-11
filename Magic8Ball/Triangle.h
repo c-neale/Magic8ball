@@ -16,4 +16,6 @@
     CGPoint origin;
 }
 
+@property (strong, nonatomic) UILabel * messageLabel;
+
 @end

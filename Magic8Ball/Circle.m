@@ -12,6 +12,8 @@
 
 @implementation Circle
 
+@synthesize color;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -19,6 +21,7 @@
         // Initialization code
         [self setBackgroundColor:[UIColor clearColor]];
         
+        color = [UIColor blueColor];
         
     }
     return self;
@@ -27,7 +30,8 @@
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextSetRGBFillColor(ctx, 0.0f, 0.0f, 1.0f, 1.0f);
+    
+    CGContextSetFillColorWithColor(ctx, color.CGColor);
     
     CGContextBeginPath(ctx);
     CGContextAddEllipseInRect(ctx, rect);

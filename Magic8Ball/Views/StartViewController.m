@@ -13,7 +13,13 @@
 #import "Triangle.h"
 #import "GyroStabilizedView.h"
 
+#import "CircleWithCutout.h"
+
 @interface StartViewController ()
+{
+    Circle * overlay;
+    Triangle * mainTriangle;
+}
 
 @end
 
@@ -46,13 +52,23 @@
         
         // create the triangle.
         CGRect testRect = CGRectMake(0.0f, 0.0f, triWidth, triHeight);
-        Triangle * tri = [[Triangle alloc] initWithFrame:testRect];
+        mainTriangle = [[Triangle alloc] initWithFrame:testRect];
         
         // add the triangle to the gyro view
-        [gyroView addSubview:tri];
+        [gyroView addSubview:mainTriangle];
         
         // and finally add the gyro view to the circle.
         [c addSubview:gyroView];
+        
+        // create and add a second circle over the top.
+        overlay = [[Circle alloc] initWithFrame:rect];
+        [overlay setColor:[UIColor blueColor]];
+        [overlay setAlpha:0.0f]; // start invisible
+        [self.view addSubview:overlay];
+        
+        CircleWithCutout * ct = [[CircleWithCutout alloc] initWithFrame:rect];
+        [ct setColor:[UIColor yellowColor]];
+        [self.view addSubview:ct];
     }
     return self;
 }
@@ -87,17 +103,59 @@
 
 - (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
-    // TODO: change the view when shake begins
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:3.0f];
+    overlay.alpha = 1.0f;
+    [UIView commitAnimations];
 }
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
+    // TODO: change the label to random message!
+    [[mainTriangle messageLabel] setText:[self randomMessage]];
     
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDelay:3.0f];
+    [UIView setAnimationDuration:2.0f];
+    overlay.alpha = 0.0f;
+    [UIView commitAnimations];
 }
 
 - (void) motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
     // TODO: restore view to original...
+}
+
+- (NSString *)randomMessage
+{
+    NSArray * messages = [[NSArray alloc] initWithObjects:
+                          // Positive
+                          @"It is certain",
+                          @"It is decidedly so",
+                          @"Without a doubt",
+                          @"Yes definately",
+                          @"You may rely on it",
+                          @"As I see it, yes",
+                          @"Most likely",
+                          @"Outlook good",
+                          @"Yes",
+                          @"Signs point to yes",
+                          // indeterminate
+                          @"Reply hazy try again",
+                          @"Ask again later",
+                          @"Better not tell you now",
+                          @"Cannot predict now",
+                          @"Concentrate and ask again",
+                          // negative
+                          @"Don't count on it",
+                          @"My reply is no",
+                          @"My sources say no",
+                          @"Outlook not so good",
+                          @"Very doubtful", nil];
+    
+    int randomIndex = arc4random_uniform([messages count]);
+    
+    return [messages objectAtIndex:randomIndex];
 }
 
 @end

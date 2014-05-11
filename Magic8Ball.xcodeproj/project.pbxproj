@@ -33,6 +33,7 @@
 		0BC6BDAF1917415700D14BBF /* Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6BDAE1917415700D14BBF /* Triangle.m */; };
 		0BC6BDB319174CFB00D14BBF /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6BDB219174CFB00D14BBF /* Circle.m */; };
 		0BC6BDB6191A07AC00D14BBF /* GyroStabilizedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6BDB5191A07AC00D14BBF /* GyroStabilizedView.m */; };
+		0BC6BDB9191F885D00D14BBF /* CircleWithCutout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6BDB8191F885D00D14BBF /* CircleWithCutout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,8 @@
 		0BC6BDB219174CFB00D14BBF /* Circle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Circle.m; sourceTree = "<group>"; };
 		0BC6BDB4191A07AC00D14BBF /* GyroStabilizedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GyroStabilizedView.h; sourceTree = "<group>"; };
 		0BC6BDB5191A07AC00D14BBF /* GyroStabilizedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GyroStabilizedView.m; sourceTree = "<group>"; };
+		0BC6BDB7191F885D00D14BBF /* CircleWithCutout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithCutout.h; sourceTree = "<group>"; };
+		0BC6BDB8191F885D00D14BBF /* CircleWithCutout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleWithCutout.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +214,8 @@
 				0BC6BDB219174CFB00D14BBF /* Circle.m */,
 				0BC6BDB4191A07AC00D14BBF /* GyroStabilizedView.h */,
 				0BC6BDB5191A07AC00D14BBF /* GyroStabilizedView.m */,
+				0BC6BDB7191F885D00D14BBF /* CircleWithCutout.h */,
+				0BC6BDB8191F885D00D14BBF /* CircleWithCutout.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 				0BC6BDAF1917415700D14BBF /* Triangle.m in Sources */,
 				0B10558D1913976B00A8AB63 /* StartViewController.m in Sources */,
 				0BC6BDB6191A07AC00D14BBF /* GyroStabilizedView.m in Sources */,
+				0BC6BDB9191F885D00D14BBF /* CircleWithCutout.m in Sources */,
 				0B10556C1913971500A8AB63 /* AppDelegate.m in Sources */,
 				0B1055681913971500A8AB63 /* main.m in Sources */,
 				0B10559619139F1200A8AB63 /* ResultViewController.m in Sources */,

@@ -12,13 +12,20 @@
 
 @implementation Triangle
 
-//@synthesize motionManager;
+@synthesize messageLabel;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setBackgroundColor:[UIColor greenColor]];
+        UIColor * backColor = [UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:0.33f];
+        [self setBackgroundColor:backColor];
+        
+        // add the message to the view.
+        
+        messageLabel = [[UILabel alloc] initWithFrame:self.frame];
+        [messageLabel setTextColor:[UIColor whiteColor]];
+        [self addSubview:messageLabel];
         
         // store the original position of this element. the triangle is going to sway.
         // we want to contrain it around the original point so that it doesn't wander off...
