@@ -66,7 +66,8 @@
         [overlay setAlpha:0.0f]; // start invisible
         [self.view addSubview:overlay];
         
-        CircleWithCutout * ct = [[CircleWithCutout alloc] initWithFrame:rect];
+        CGRect largerRect = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width * 2.0f, rect.size.height * 2.0f);
+        CircleWithCutout * ct = [[CircleWithCutout alloc] initWithFrame:largerRect];
         [ct setColor:[UIColor yellowColor]];
         [self.view addSubview:ct];
     }
