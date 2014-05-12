@@ -32,10 +32,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
+  
         // first, draw the backgroud circle
         CGRect rect = CGRectMake(50.0f, 100.0f, 200.0f, 200.0f);
-        Circle * c = [[Circle alloc] initWithFrame:rect];
+/*        Circle * c = [[Circle alloc] initWithFrame:rect];
         [self.view addSubview:c];
         
         // calculate where the triangle will go.
@@ -65,8 +65,8 @@
         [overlay setColor:[UIColor blueColor]];
         [overlay setAlpha:0.0f]; // start invisible
         [self.view addSubview:overlay];
-        
-        CGRect largerRect = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width * 2.0f, rect.size.height * 2.0f);
+        */
+        CGRect largerRect = CGRectMake(100.0f, rect.origin.y, rect.size.width * 1.0f, rect.size.height * 1.0f);
         CircleWithCutout * ct = [[CircleWithCutout alloc] initWithFrame:largerRect];
         [ct setColor:[UIColor yellowColor]];
         [self.view addSubview:ct];
