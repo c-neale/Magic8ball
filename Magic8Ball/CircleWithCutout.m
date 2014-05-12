@@ -9,20 +9,22 @@
 #import "CircleWithCutout.h"
 
 //#define DISABLE_CIRCLE
-#define DISABLE_CUTOUT
+//#define DISABLE_CUTOUT
 //#define DISABLE_GRADIENT
 //#define DISABLE_BLACK_SHADOW
 
 
 @implementation CircleWithCutout
 
-@synthesize color;
-
-- (id)initWithFrame:(CGRect)frame
+- (id) initWithRadius:(CGFloat)radius at:(CGPoint)center mainColor:(UIColor*)main
 {
+    CGRect frame = CGRectMake(center.x - radius, center.y - radius, radius * 2.0f, radius * 2.0f);
     self = [super initWithFrame:frame];
+    
     if (self) {
         [self setBackgroundColor:[UIColor clearColor]];
+        
+        mainColor = main;
     }
     return self;
 }
@@ -33,7 +35,7 @@
     CGContextRef ctx = UIGraphicsGetCurrentContext();
 
 #ifndef DISABLE_CIRCLE
-    CGContextSetFillColorWithColor(ctx, color.CGColor);
+    CGContextSetFillColorWithColor(ctx, mainColor.CGColor);
 
     // first draw a circle. we need something to cutout of
     CGContextBeginPath(ctx);
@@ -113,14 +115,6 @@
     CGColorSpaceRelease(colorSpace);  // we need to make sure to release this even though we are using ARC...
     
     CGContextRestoreGState(ctx);
-    
-    
-    
-    
-    // TODO: add some darkened bits around the edge of the circle... (not sure how this will go...
-    // add shadow ellipse with gradient... (this needs to be drawn first so it appears underneath the 'shpere'
-    // add a darker highlight, cut 90% using a mask leaving just the lower part. This may need some experimentation to get it right.
-    
     
     // now we do the cutout bit...
 #ifndef DISABLE_CUTOUT

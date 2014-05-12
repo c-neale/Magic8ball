@@ -10,9 +10,9 @@
 
 @interface CircleWithCutout : UIView
 {
-    
+    UIColor * mainColor;
 }
 
-@property (nonatomic, strong) UIColor * color;
+- (id) initWithRadius:(CGFloat)radius at:(CGPoint)center mainColor:(UIColor*)main;
 
 @end

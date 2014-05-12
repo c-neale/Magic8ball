@@ -35,7 +35,7 @@
   
         // first, draw the backgroud circle
         CGRect rect = CGRectMake(50.0f, 100.0f, 200.0f, 200.0f);
-/*        Circle * c = [[Circle alloc] initWithFrame:rect];
+        Circle * c = [[Circle alloc] initWithFrame:rect];
         [self.view addSubview:c];
         
         // calculate where the triangle will go.
@@ -65,10 +65,19 @@
         [overlay setColor:[UIColor blueColor]];
         [overlay setAlpha:0.0f]; // start invisible
         [self.view addSubview:overlay];
-        */
-        CGRect largerRect = CGRectMake(100.0f, rect.origin.y, rect.size.width * 1.0f, rect.size.height * 1.0f);
-        CircleWithCutout * ct = [[CircleWithCutout alloc] initWithFrame:largerRect];
-        [ct setColor:[UIColor yellowColor]];
+
+        //CGRect largerRect = CGRectMake(100.0f, rect.origin.y, rect.size.width * 1.0f, rect.size.height * 1.0f);
+        //CircleWithCutout * ct = [[CircleWithCutout alloc] initWithFrame:largerRect];
+        //[ct setColor:[UIColor yellowColor]];
+        
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGPoint screenCenter = CGPointMake(screenRect.origin.x + screenRect.size.width * 0.5f, screenRect.origin.y + screenRect.size.height * 0.5f);
+        UIColor * sphereColor = [UIColor colorWithRed:0.302f green:0.302f blue:0.302f alpha:1.0f];
+        
+        CircleWithCutout * ct = [[CircleWithCutout alloc] initWithRadius:200.0f
+                                                                      at:screenCenter
+                                                               mainColor:sphereColor];
+        
         [self.view addSubview:ct];
     }
     return self;
