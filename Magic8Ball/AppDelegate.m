@@ -22,8 +22,11 @@
 
     // Set a root view controller so the app knows where to start...
     StartViewController * svc = [[StartViewController alloc] init];
-    [[self window] setRootViewController:svc];
+
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:svc];
     
+    [[self window] setRootViewController:navController];
+        
     // Google Analytics initilisation code:
 #ifndef DISABLE_ANALYTICS
     // send uncaught exceptions to google...

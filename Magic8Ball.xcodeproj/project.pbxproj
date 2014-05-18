@@ -29,7 +29,8 @@
 		0B1056801915F7BA00A8AB63 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B10567F1915F7BA00A8AB63 /* SystemConfiguration.framework */; };
 		0B1056821915F7C900A8AB63 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B1056811915F7C900A8AB63 /* libz.dylib */; };
 		0B2151001920DA45006F9275 /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2150FF1920DA45006F9275 /* UIColor+CustomColors.m */; };
-		0B2151041928B966006F9275 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2151031928B966006F9275 /* AboutViewController.m */; };
+		0B2151081928BB70006F9275 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2151061928BB70006F9275 /* AboutViewController.m */; };
+		0B2151091928BB70006F9275 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B2151071928BB70006F9275 /* AboutViewController.xib */; };
 		0BC6BDAF1917415700D14BBF /* Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6BDAE1917415700D14BBF /* Triangle.m */; };
 		0BC6BDB319174CFB00D14BBF /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6BDB219174CFB00D14BBF /* Circle.m */; };
 		0BC6BDB6191A07AC00D14BBF /* GyroStabilizedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6BDB5191A07AC00D14BBF /* GyroStabilizedView.m */; };
@@ -83,8 +84,9 @@
 		0B1056811915F7C900A8AB63 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0B2150FE1920DA45006F9275 /* UIColor+CustomColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CustomColors.h"; sourceTree = "<group>"; };
 		0B2150FF1920DA45006F9275 /* UIColor+CustomColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CustomColors.m"; sourceTree = "<group>"; };
-		0B2151021928B966006F9275 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
-		0B2151031928B966006F9275 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		0B2151051928BB70006F9275 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		0B2151061928BB70006F9275 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		0B2151071928BB70006F9275 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 		0BC6BDAD1917415700D14BBF /* Triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Triangle.h; sourceTree = "<group>"; };
 		0BC6BDAE1917415700D14BBF /* Triangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Triangle.m; sourceTree = "<group>"; };
 		0BC6BDB119174CFB00D14BBF /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Circle.h; sourceTree = "<group>"; };
@@ -250,8 +252,9 @@
 				0B10558A1913976B00A8AB63 /* StartViewController.h */,
 				0B10558B1913976B00A8AB63 /* StartViewController.m */,
 				0B10558C1913976B00A8AB63 /* StartViewController.xib */,
-				0B2151021928B966006F9275 /* AboutViewController.h */,
-				0B2151031928B966006F9275 /* AboutViewController.m */,
+				0B2151051928BB70006F9275 /* AboutViewController.h */,
+				0B2151061928BB70006F9275 /* AboutViewController.m */,
+				0B2151071928BB70006F9275 /* AboutViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 			files = (
 				0B1055661913971500A8AB63 /* InfoPlist.strings in Resources */,
 				0B10556E1913971500A8AB63 /* Images.xcassets in Resources */,
+				0B2151091928BB70006F9275 /* AboutViewController.xib in Resources */,
 				0B10558E1913976B00A8AB63 /* StartViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,7 +363,7 @@
 				0B1055681913971500A8AB63 /* main.m in Sources */,
 				0BC6BDB319174CFB00D14BBF /* Circle.m in Sources */,
 				0B10559D1914F75000A8AB63 /* UpdateChecker.m in Sources */,
-				0B2151041928B966006F9275 /* AboutViewController.m in Sources */,
+				0B2151081928BB70006F9275 /* AboutViewController.m in Sources */,
 				0B2151001920DA45006F9275 /* UIColor+CustomColors.m in Sources */,
 				0B10559A1913BEC800A8AB63 /* VersionComparer.m in Sources */,
 			);

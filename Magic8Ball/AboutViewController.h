@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface AboutViewController : UIViewController
+{
+    
+}
+
+- (IBAction)backButtonPressed:(id)sender;
+
 
 @end

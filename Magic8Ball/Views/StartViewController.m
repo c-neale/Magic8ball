@@ -27,8 +27,6 @@
 
 @implementation StartViewController
 
-@synthesize messageLabel;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -77,6 +75,15 @@
                                                                mainColor:[UIColor sphereColor]];
         
         [self.view addSubview:ct];
+        
+        /* add info button to navigation bar */
+        
+        UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+        [infoButton addTarget:self action:@selector(infoButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIBarButtonItem *modalButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
+        [self.navigationItem setLeftBarButtonItem:modalButton animated:YES];
+        
     }
     return self;
 }
@@ -176,9 +183,15 @@
     return [messages objectAtIndex:randomIndex];
 }
 
+- (void)infoButtonAction
+{
+    NSLog(@"info button pressed");
+}
+
 - (IBAction)aboutButtonPressed:(id)sender
 {
     AboutViewController * avc = [[AboutViewController alloc] init];
-    [[self navigationController] pushViewController:avc animated:YES];
+
+    [self.navigationController pushViewController:avc animated:YES];
 }
 @end
