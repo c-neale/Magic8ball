@@ -7,7 +7,7 @@
 //
 
 #import "StartViewController.h"
-#import "ResultViewController.h"
+#import "AboutViewController.h"
 
 #import "Circle.h"
 #import "Triangle.h"
@@ -123,6 +123,7 @@
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
+    // TODO: need tp find how to make the previous animatiom complete before starting this.
     if(event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake)
     {
         NSLog(@"end Shake!");
@@ -175,4 +176,9 @@
     return [messages objectAtIndex:randomIndex];
 }
 
+- (IBAction)aboutButtonPressed:(id)sender
+{
+    AboutViewController * avc = [[AboutViewController alloc] init];
+    [[self navigationController] pushViewController:avc animated:YES];
+}
 @end

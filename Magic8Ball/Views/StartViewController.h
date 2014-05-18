@@ -15,6 +15,6 @@
     
 }
 
-@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+- (IBAction)aboutButtonPressed:(id)sender;
 
 @end
