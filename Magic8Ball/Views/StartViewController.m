@@ -15,6 +15,8 @@
 
 #import "CircleWithCutout.h"
 
+#import "UIColor+CustomColors.h"
+
 @interface StartViewController ()
 {
     Circle * overlay;
@@ -31,18 +33,22 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-  
+
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGPoint screenCenter = CGPointMake(screenRect.origin.x + screenRect.size.width * 0.5f, screenRect.origin.y + screenRect.size.height * 0.5f);
+        
         // first, draw the backgroud circle
-        CGRect rect = CGRectMake(50.0f, 100.0f, 200.0f, 200.0f);
-        Circle * c = [[Circle alloc] initWithFrame:rect];
-        [self.view addSubview:c];
+        CGRect circleRect = CGRectMake(screenCenter.x - 100.0f, screenCenter.y - 100.0f, 200.0f, 200.0f);
+        
+        Circle * baseCircle = [[Circle alloc] initWithFrame:circleRect];
+        [baseCircle setColor:[UIColor centerColor]];
+        [self.view addSubview:baseCircle];
         
         // calculate where the triangle will go.
-        float halfWidth = c.frame.size.width * 0.5f;
-        float halfHeight = c.frame.size.height * 0.5f;
-        float triWidth = c.frame.size.width * 0.8f;
-        float triHeight = c.frame.size.height * 0.8f;
+        float halfWidth = baseCircle.frame.size.width * 0.5f;
+        float halfHeight = baseCircle.frame.size.height * 0.5f;
+        float triWidth = baseCircle.frame.size.width * 0.8f;
+        float triHeight = baseCircle.frame.size.height * 0.8f;
         
         CGRect triRect = CGRectMake(halfWidth - (triWidth * 0.5f), halfHeight - (triHeight * 0.5f), triWidth, triHeight);
         
@@ -58,25 +64,17 @@
         [gyroView addSubview:mainTriangle];
         
         // and finally add the gyro view to the circle.
-        [c addSubview:gyroView];
+        [baseCircle addSubview:gyroView];
         
         // create and add a second circle over the top.
-        overlay = [[Circle alloc] initWithFrame:rect];
-        [overlay setColor:[UIColor blueColor]];
+        overlay = [[Circle alloc] initWithFrame:circleRect];
+        [overlay setColor:[UIColor centerColor]];
         [overlay setAlpha:0.0f]; // start invisible
         [self.view addSubview:overlay];
-
-        //CGRect largerRect = CGRectMake(100.0f, rect.origin.y, rect.size.width * 1.0f, rect.size.height * 1.0f);
-        //CircleWithCutout * ct = [[CircleWithCutout alloc] initWithFrame:largerRect];
-        //[ct setColor:[UIColor yellowColor]];
-        
-        CGRect screenRect = [[UIScreen mainScreen] bounds];
-        CGPoint screenCenter = CGPointMake(screenRect.origin.x + screenRect.size.width * 0.5f, screenRect.origin.y + screenRect.size.height * 0.5f);
-        UIColor * sphereColor = [UIColor colorWithRed:0.302f green:0.302f blue:0.302f alpha:1.0f];
         
         CircleWithCutout * ct = [[CircleWithCutout alloc] initWithRadius:200.0f
                                                                       at:screenCenter
-                                                               mainColor:sphereColor];
+                                                               mainColor:[UIColor sphereColor]];
         
         [self.view addSubview:ct];
     }
@@ -113,26 +111,35 @@
 
 - (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:3.0f];
-    overlay.alpha = 1.0f;
-    [UIView commitAnimations];
+    if(event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake)
+    {
+        NSLog(@"begin Shake!");
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:1.0f];
+        overlay.alpha = 1.0f;
+        [UIView commitAnimations];
+    }
 }
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
-    // TODO: change the label to random message!
-    [[mainTriangle messageLabel] setText:[self randomMessage]];
+    if(event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake)
+    {
+        NSLog(@"end Shake!");
+
+        [[mainTriangle messageLabel] setText:[self randomMessage]];
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDelay:3.0f];
-    [UIView setAnimationDuration:2.0f];
-    overlay.alpha = 0.0f;
-    [UIView commitAnimations];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelay:2.0f];
+        [UIView setAnimationDuration:1.0f];
+        overlay.alpha = 0.0f;
+        [UIView commitAnimations];
+    }
 }
 
 - (void) motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
+    NSLog(@"shake cancelled");
     // TODO: restore view to original...
 }
 

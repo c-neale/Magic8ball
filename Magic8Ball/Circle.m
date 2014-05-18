@@ -20,9 +20,6 @@
     if (self) {
         // Initialization code
         [self setBackgroundColor:[UIColor clearColor]];
-        
-        color = [UIColor blueColor];
-        
     }
     return self;
 }

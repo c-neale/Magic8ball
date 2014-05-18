@@ -44,8 +44,8 @@
 {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
-    CGContextSetRGBFillColor(ctx, 0.0f, 0.0f, 0.0f, 1.0f);
-    
+    CGContextSetRGBFillColor(ctx, 1.0f, 1.0f, 0.941f, 1.0f);
+
     CGContextBeginPath(ctx);
     
     // Add a triangle to the current path

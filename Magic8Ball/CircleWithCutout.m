@@ -93,7 +93,7 @@
     // set up the colors that we are using for the gradient.
     CGFloat colors [] =
     {
-        1.0f, 1.0f, 1.0f, 1.0f,     // solid white
+        0.722f, 0.722f, 0.722f, 0.722f,     // light grey
         1.0f, 1.0f, 1.0f, 0.0f,     // invisible white
     };
     
@@ -104,7 +104,7 @@
                                 gradientOrigin,                         // start center point
                                 0,                                      // start radius
                                 gradientOrigin,                         // end center point
-                                self.frame.size.width * 0.5f,           // end radius
+                                self.frame.size.width * 0.4f,           // end radius
                                 0);  // to be honest, I'm not sure what this option does...
     
     CGGradientRelease(gradient);
