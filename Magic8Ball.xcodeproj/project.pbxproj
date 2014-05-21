@@ -31,6 +31,7 @@
 		0B2151001920DA45006F9275 /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2150FF1920DA45006F9275 /* UIColor+CustomColors.m */; };
 		0B2151081928BB70006F9275 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2151061928BB70006F9275 /* AboutViewController.m */; };
 		0B2151091928BB70006F9275 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B2151071928BB70006F9275 /* AboutViewController.xib */; };
+		0B21510F1928D694006F9275 /* InsetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B21510E1928D694006F9275 /* InsetView.m */; };
 		0BC6BDAF1917415700D14BBF /* Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6BDAE1917415700D14BBF /* Triangle.m */; };
 		0BC6BDB319174CFB00D14BBF /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6BDB219174CFB00D14BBF /* Circle.m */; };
 		0BC6BDB6191A07AC00D14BBF /* GyroStabilizedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6BDB5191A07AC00D14BBF /* GyroStabilizedView.m */; };
@@ -87,6 +88,8 @@
 		0B2151051928BB70006F9275 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		0B2151061928BB70006F9275 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		0B2151071928BB70006F9275 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
+		0B21510D1928D694006F9275 /* InsetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsetView.h; sourceTree = "<group>"; };
+		0B21510E1928D694006F9275 /* InsetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsetView.m; sourceTree = "<group>"; };
 		0BC6BDAD1917415700D14BBF /* Triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Triangle.h; sourceTree = "<group>"; };
 		0BC6BDAE1917415700D14BBF /* Triangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Triangle.m; sourceTree = "<group>"; };
 		0BC6BDB119174CFB00D14BBF /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Circle.h; sourceTree = "<group>"; };
@@ -220,6 +223,8 @@
 				0BC6BDB5191A07AC00D14BBF /* GyroStabilizedView.m */,
 				0BC6BDB7191F885D00D14BBF /* CircleWithCutout.h */,
 				0BC6BDB8191F885D00D14BBF /* CircleWithCutout.m */,
+				0B21510D1928D694006F9275 /* InsetView.h */,
+				0B21510E1928D694006F9275 /* InsetView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -305,6 +310,9 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				TargetAttributes = {
+					0B1055571913971500A8AB63 = {
+						DevelopmentTeam = 95YMZ8KDPQ;
+					};
 					0B1055721913971500A8AB63 = {
 						TestTargetID = 0B1055571913971500A8AB63;
 					};
@@ -355,6 +363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B21510F1928D694006F9275 /* InsetView.m in Sources */,
 				0BC6BDAF1917415700D14BBF /* Triangle.m in Sources */,
 				0B10558D1913976B00A8AB63 /* StartViewController.m in Sources */,
 				0BC6BDB6191A07AC00D14BBF /* GyroStabilizedView.m in Sources */,
@@ -482,6 +491,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Magic8Ball/Magic8Ball-Prefix.pch";
 				INFOPLIST_FILE = "Magic8Ball/Magic8Ball-Info.plist";
@@ -491,6 +502,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -500,6 +512,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Magic8Ball/Magic8Ball-Prefix.pch";
 				INFOPLIST_FILE = "Magic8Ball/Magic8Ball-Info.plist";
@@ -509,6 +523,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

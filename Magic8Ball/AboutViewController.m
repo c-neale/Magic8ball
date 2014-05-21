@@ -8,6 +8,8 @@
 
 #import "AboutViewController.h"
 
+#import "InsetView.h"
+
 @interface AboutViewController ()
 
 @end
@@ -18,7 +20,12 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
+        CGRect viewRect = CGRectMake(30.0f, 100.0f, 200.0f, 200.0f);
+        InsetView * iv = [[InsetView alloc] initWithFrame:viewRect];
+        
+        [self.view addSubview:iv];
+        
     }
     return self;
 }

@@ -82,7 +82,7 @@
         [infoButton addTarget:self action:@selector(infoButtonAction) forControlEvents:UIControlEventTouchUpInside];
         
         UIBarButtonItem *modalButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
-        [self.navigationItem setLeftBarButtonItem:modalButton animated:YES];
+        [self.navigationItem setRightBarButtonItem:modalButton animated:YES];
         
     }
     return self;

@@ -11,7 +11,7 @@
 
 @interface GyroStabilizedView : UIView
 {
-    
+    float currentAngle;
 }
 
 @property (strong, nonatomic) CMMotionManager *motionManager;
