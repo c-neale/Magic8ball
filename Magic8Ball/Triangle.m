@@ -35,9 +35,9 @@
         
         reverse = YES;
         
+#ifndef DISABLE_FLOAT
         float angle = [self randomFloatInRange:5.0f toMax:10.0f] * (M_PI / 180.0f);
         CGPoint pt = [self randomPoint];
-#ifndef DISABLE_FLOAT
         [self floatWithAngle:angle ToPosition:pt];
 #endif
     }

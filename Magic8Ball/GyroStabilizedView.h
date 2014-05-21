@@ -16,4 +16,6 @@
 
 @property (strong, nonatomic) CMMotionManager *motionManager;
 
+- (float)number:(float)number inMinRange:(float)minRange toMaxRange:(float)maxRange;
+
 @end

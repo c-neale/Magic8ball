@@ -63,6 +63,21 @@
                                                         completion:nil];
                                    }];
 #endif
+        
+        // using the accelerometer method is more reliable.  the gyro sensor will only return rates of rotation, so it impossible to
+        // detect the initial orientation.  This means that if the app is started in landscape orientation, the rotation info that
+        // the app has access to will always be 90 degrees out.
+        
+        // we could probably use some sort of hybrid approach - use the accelerometer to get the initial orientation and then use the
+        // gyro data to maintain, perhaps with periodic calls to the accelerometer to check and correct any inaccuracies.
+        
+        // for whats its worth, i don't think its worth following this approach at the moment.  Although the accelerometer method uses
+        // some more advanced math functions which are most likely slower (I have no idea of the performance hit of using acosf() function),
+        // the app is small enough that we have the capacity to take this hit. changing to the hybrid approach will just be making thing more
+        // complicated for no noticeable gains.
+        
+        // I may however change it over to a hybrid method at a later stage - just for the fun of the challenge.
+        
         [motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
                                             withHandler:^(CMAccelerometerData *accelData, NSError *error) {
                                                
@@ -92,19 +107,34 @@
                                                 float cosine = (0.0f * accelData.acceleration.x) + (-1.0f * accelData.acceleration.y);
                                                 
                                                 // for acosf to work, the number needs to be in the rangs -1 <= x <= 1
-                                                cosine = MAX(cosine, -1);
-                                                cosine = MIN(cosine, 1);
+                                                // if its outside this range it will return NaN
+                                                cosine = [self number:cosine inMinRange:-1.0f toMaxRange:1.0f];
                                                 
                                                 float angle = acosf(cosine);
-                                                
+                                                angle *= accelData.acceleration.x < 0 ? 1.0f : -1.0f;
                                                 // TODO: need to work out the direction.
                                                 
                                                 NSLog(@"current angle from upright: %0.2f (x: %0.2f y: %0.2f)", angle, accelData.acceleration.x, accelData.acceleration.y);
                                                 
+                                                [UIView animateWithDuration:0.2f
+                                                                      delay:0.0f
+                                                                    options:UIViewAnimationOptionCurveEaseInOut
+                                                                 animations:^{
+                                                                     
+                                                                     // rotate around the z axis
+                                                                     self.transform = CGAffineTransformMakeRotation(angle);
+                                                                 }
+                                                                 completion:nil];
                                             }];
         
     }
     return self;
+}
+
+- (float)number:(float)num inMinRange:(float)minRange toMaxRange:(float)maxRange
+{
+    num = MAX(num, minRange);
+    return MIN(num, maxRange);
 }
 
 @end
