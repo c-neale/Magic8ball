@@ -40,9 +40,48 @@
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-50634961-1"];
 #endif
     
+    [self checkAndSetDefaults];
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)checkAndSetDefaults
+{
+    // get the location of the pList file from the settings.bundle
+    NSString * settingsPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Settings.bundle"];
+    NSString * pListFile = [settingsPath stringByAppendingPathComponent:@"Root.plist"];
+    
+    // get the preference specifiers array. this contains the settings
+    NSDictionary * settingDict = [NSDictionary dictionaryWithContentsOfFile:pListFile];
+    NSArray * prefsArray = [settingDict objectForKey:@"PreferenceSpecifiers"];
+    
+    // get the shared defaults object
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    
+    // loop through the preference items and set the default value if no value is set.
+    for(NSDictionary * item in prefsArray)
+    {
+        // get the item key
+        NSString * key = [item objectForKey:@"Key"];
+        if (key)
+        {
+            // get the current value and the default value. if either of these is not
+            // set then they will return nil
+            id value = [defaults objectForKey:key];
+            id defaultValue = [item objectForKey:@"DefaultValue"];
+            
+            if (!value && defaultValue)
+            {
+                [defaults setObject:defaultValue forKey:key];
+            }
+        }
+    }
+    
+    // write the changes back to disk for next time.
+    [defaults synchronize];
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

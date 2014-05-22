@@ -10,8 +10,6 @@
 
 #import <math.h>
 
-#define DISABLE_FLOAT
-
 @implementation Triangle
 
 @synthesize messageLabel;
@@ -35,11 +33,15 @@
         
         reverse = YES;
         
-#ifndef DISABLE_FLOAT
-        float angle = [self randomFloatInRange:5.0f toMax:10.0f] * (M_PI / 180.0f);
-        CGPoint pt = [self randomPoint];
-        [self floatWithAngle:angle ToPosition:pt];
-#endif
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        BOOL enabled = [defaults boolForKey:@"enableFloat"];
+        
+        if(enabled)
+        {
+            float angle = [self randomFloatInRange:5.0f toMax:10.0f] * (M_PI / 180.0f);
+            CGPoint pt = [self randomPoint];
+            [self floatWithAngle:angle ToPosition:pt];
+        }
     }
     return self;
 }

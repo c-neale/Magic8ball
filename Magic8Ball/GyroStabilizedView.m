@@ -25,17 +25,19 @@
         
         // initialise the angle to zero.
         currentAngle = 0.0f;
-        
+  
+ 
         motionManager = [[CMMotionManager alloc] init];
         
-        const float gyroUpdateInterval = 0.2f;
+//      const float gyroUpdateInterval = 0.2f;
         const float accelUpdateInterval = 0.2f;
         
-        [motionManager setGyroUpdateInterval:gyroUpdateInterval];
+//      [motionManager setGyroUpdateInterval:gyroUpdateInterval];
         [motionManager setAccelerometerUpdateInterval:accelUpdateInterval];
- 
-#ifndef DISABLE_GYRO
-        [motionManager startGyroUpdatesToQueue:[NSOperationQueue currentQueue]
+
+        
+        // not using the gyroscope, but keeping the code here for reference.
+/*        [motionManager startGyroUpdatesToQueue:[NSOperationQueue currentQueue]
                                    withHandler:^(CMGyroData *gyroData, NSError *error) {
                                        
                                        // filter out any small residual values. the gyroscope
@@ -62,8 +64,7 @@
                                                         }
                                                         completion:nil];
                                    }];
-#endif
-        
+*/
         // using the accelerometer method is more reliable.  the gyro sensor will only return rates of rotation, so it impossible to
         // detect the initial orientation.  This means that if the app is started in landscape orientation, the rotation info that
         // the app has access to will always be 90 degrees out.
@@ -78,53 +79,62 @@
         
         // I may however change it over to a hybrid method at a later stage - just for the fun of the challenge.
         
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
         [motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
-                                            withHandler:^(CMAccelerometerData *accelData, NSError *error) {
+                                                withHandler:^(CMAccelerometerData *accelData, NSError *error) {
                                                
-                                               // NSLog(@"x: %0.3f y: %0.3f z: %0.3f", accelData.acceleration.x, accelData.acceleration.y, accelData.acceleration.z);
+                                                // NSLog(@"x: %0.3f y: %0.3f z: %0.3f", accelData.acceleration.x, accelData.acceleration.y, accelData.acceleration.z);
+
+                                                BOOL enabled = [defaults boolForKey:@"enableStabilize"];
+                                                    
+                                                if( enabled )
+                                                {
+                                                    
                                                 
-                                                // TODO: need to work out the maths to do this.
+                                                    // sample rotation data:
+                                                    //                        x     y    z
+                                                    // upright:              0.0, -1.0, 0.0
+                                                    // upside down:          0.0,  1.0, 0.0
+                                                    // rotate left:         -1.0,  0.0, 0.0
+                                                    // rotate right:         1.0,  0.0, 0.0
+                                                    // 45 deg left:         -0.5, -0.5, 0.0
                                                 
-                                                // sample rotation data:
-                                                //                        x     y    z
-                                                // upright:              0.0, -1.0, 0.0
-                                                // upside down:          0.0,  1.0, 0.0
-                                                // rotate left:         -1.0,  0.0, 0.0
-                                                // rotate right:         1.0,  0.0, 0.0
-                                                // 45 deg left:         -0.5, -0.5, 0.0
+                                                    /*
+                                                        equation for dot product between vector a and vector b is:
+                                                        float dotProd = (a.x * b.x + a.y * b.y);
+                                                 
+                                                        this gives us the cosine of the angle between the 2 vectors.
+                                                     */
                                                 
-                                                /*
-                                                int vector_dotprod(Vector a, Vector b) {
-                                                    return (a.x * b.x + a.y * b.y + a.z * b.z);
-                                                }
-                                                 */
+                                                    // so lets make a our resting baseline upright (0.0, -1.0, 0.0)
+                                                    // and b will be our accelerometer data.
                                                 
-                                                // so lets make a our resting baseline upright (0.0, -1.0, 0.0)
-                                                // and b will be our accelerometer data.
+                                                    // we are basically doing a dot product on 2 vectors here to work out the angle between the
+                                                    // data from the accelerometer and its normal resting orientation.
+                                                    float cosine = (0.0f * accelData.acceleration.x) + (-1.0f * accelData.acceleration.y);
                                                 
-                                                // we are basically doing a dot product on 2 vectors here to work out the angle between the
-                                                // data from the accelerometer and its normal resting orientation.
-                                                float cosine = (0.0f * accelData.acceleration.x) + (-1.0f * accelData.acceleration.y);
+                                                    // for acosf to work, the number needs to be in the rangs -1 <= x <= 1
+                                                    // if its outside this range it will return NaN
+                                                    cosine = [self number:cosine inMinRange:-1.0f toMaxRange:1.0f];
                                                 
-                                                // for acosf to work, the number needs to be in the rangs -1 <= x <= 1
-                                                // if its outside this range it will return NaN
-                                                cosine = [self number:cosine inMinRange:-1.0f toMaxRange:1.0f];
+                                                    // this the the number of radians we need to rotate...
+                                                    float angle = acosf(cosine);
+                                                    // sort out which direction we are rotating
+                                                    angle *= accelData.acceleration.x < 0 ? 1.0f : -1.0f;
                                                 
-                                                float angle = acosf(cosine);
-                                                angle *= accelData.acceleration.x < 0 ? 1.0f : -1.0f;
-                                                // TODO: need to work out the direction.
+                                                    // NSLog(@"current angle from upright: %0.2f (x: %0.2f y: %0.2f)", angle, accelData.acceleration.x, accelData.acceleration.y);
                                                 
-                                                NSLog(@"current angle from upright: %0.2f (x: %0.2f y: %0.2f)", angle, accelData.acceleration.x, accelData.acceleration.y);
-                                                
-                                                [UIView animateWithDuration:0.2f
-                                                                      delay:0.0f
-                                                                    options:UIViewAnimationOptionCurveEaseInOut
-                                                                 animations:^{
+                                                    [UIView animateWithDuration:0.2f
+                                                                          delay:0.0f
+                                                                        options:UIViewAnimationOptionCurveEaseInOut
+                                                                     animations:^{
                                                                      
-                                                                     // rotate around the z axis
-                                                                     self.transform = CGAffineTransformMakeRotation(angle);
-                                                                 }
-                                                                 completion:nil];
+                                                                         // rotate around the z axis
+                                                                         self.transform = CGAffineTransformMakeRotation(angle);
+                                                                     }
+                                                                     completion:nil];
+                                                }
                                             }];
         
     }

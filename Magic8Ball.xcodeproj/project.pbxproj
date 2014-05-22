@@ -36,6 +36,7 @@
 		0BC6BDB319174CFB00D14BBF /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6BDB219174CFB00D14BBF /* Circle.m */; };
 		0BC6BDB6191A07AC00D14BBF /* GyroStabilizedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6BDB5191A07AC00D14BBF /* GyroStabilizedView.m */; };
 		0BC6BDB9191F885D00D14BBF /* CircleWithCutout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6BDB8191F885D00D14BBF /* CircleWithCutout.m */; };
+		0BF40AC1192D8E4000B4FE02 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0BF40AC0192D8E4000B4FE02 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		0BC6BDB5191A07AC00D14BBF /* GyroStabilizedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GyroStabilizedView.m; sourceTree = "<group>"; };
 		0BC6BDB7191F885D00D14BBF /* CircleWithCutout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleWithCutout.h; sourceTree = "<group>"; };
 		0BC6BDB8191F885D00D14BBF /* CircleWithCutout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleWithCutout.m; sourceTree = "<group>"; };
+		0BF40AC0192D8E4000B4FE02 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 		0B10554F1913971500A8AB63 = {
 			isa = PBXGroup;
 			children = (
+				0BF40AC0192D8E4000B4FE02 /* Settings.bundle */,
 				0B1056791915F74D00A8AB63 /* libGoogleAnalyticsServices.a */,
 				0B1055611913971500A8AB63 /* Magic8Ball */,
 				0B10557A1913971500A8AB63 /* Magic8BallTests */,
@@ -343,6 +346,7 @@
 			files = (
 				0B1055661913971500A8AB63 /* InfoPlist.strings in Resources */,
 				0B10556E1913971500A8AB63 /* Images.xcassets in Resources */,
+				0BF40AC1192D8E4000B4FE02 /* Settings.bundle in Resources */,
 				0B2151091928BB70006F9275 /* AboutViewController.xib in Resources */,
 				0B10558E1913976B00A8AB63 /* StartViewController.xib in Resources */,
 			);
